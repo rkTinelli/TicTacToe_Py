@@ -55,28 +55,53 @@ def checkTie(board):
         for j in range(3):
             if board[i][j] == " ":
                 return False
-            return True
+        print("Game ended in a tie...")
+        return True
 
 
 def checkWin(Board,symbol):
     # Check lines
     for i in range(3):
             if board[i][0] == board[i][1] == board[i][2] == symbol:
+                print("Player " + symbol + " won the game!")
                 return True
 
     # Check column
     for j in range(3):
             if board[0][j] == board[1][j] == board[2][j] == symbol:
+                print("Player " + symbol + " won the game!")
                 return True
 
     # Check diagonals
     if board[0][0] == board[1][1] == board[2][2] == symbol:
+        print("Player " + symbol + " won the game!")
         return True
     if board[0][2] == board[1][1] == board[2][0] == symbol:
+        print("Player " + symbol + " won the game!")
         return True
 
     return False
 
 
-computerTurn(board)
-showBoard(board)
+def mainGame():
+
+    while True:
+        showBoard(board)
+        # Player turn, with checks
+        playerTurn(board)
+        if checkWin(board, "X"):
+            break
+        if checkTie(board):
+            break
+        # Computer turn, with checks
+        computerTurn(board)
+        if checkWin(board, "O"):
+            break
+        if checkTie(board):
+            break
+    # Make sure to print the final board of the game
+    showBoard(board)
+
+
+# Calls the main game function do the user can play
+mainGame()
